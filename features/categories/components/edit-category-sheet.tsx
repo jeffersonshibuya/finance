@@ -20,7 +20,7 @@ export const EditCategorySheet = () => {
   const {isOpen, onClose, id} = useOpenCategory()
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "Your are about to delete this"
+    "Your are about to delete this category"
   )
 
   const categoryQuery = useGetCategory(id)

@@ -20,7 +20,7 @@ export const EditAccountSheet = () => {
   const {isOpen, onClose, id} = useOpenAccount()
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
-    "Your are about to delete this"
+    "Your are about to delete this account"
   )
 
   const accountQuery = useGetAccount(id)
@@ -63,7 +63,7 @@ export const EditAccountSheet = () => {
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Edit Account</SheetTitle>
-            <SheetDescription>Edit account to track your transactions</SheetDescription>
+            <SheetDescription>Edit account to track your account</SheetDescription>
           </SheetHeader>
           {isLoading ? (
             <div className="absolute inset-0 flex items-center justify-center">

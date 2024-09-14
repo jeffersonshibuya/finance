@@ -6,19 +6,19 @@ import { Loader2, PlusIcon } from "lucide-react";
 import { columns } from "./columns";
 import { DataTable } from "@/components/data-table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useNewCategory } from "@/features/categories/hooks/use-new-category";
-import { useBulkDeleteCategories } from "@/features/categories/api/use-bulk-delete";
-import { useGetCategories } from "@/features/categories/api/use-get-categories";
+import { useNewTransaction } from "@/features/transactions/hooks/use-new-transaction";
+import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-delete-transactions";
+import { useGetTransactions } from "@/features/transactions/api/use-get-transactions";
 
-export default function CategoriesPage() {
-  const newCategory = useNewCategory()
-  const deleteAccounts = useBulkDeleteCategories()
-  const accountsQuery = useGetCategories()
-  const accounts = accountsQuery.data || []
+export default function TransactionsPage() {
+  const newTransaction = useNewTransaction()
+  const deleteTransactions = useBulkDeleteTransactions()
+  const transactionsQuery = useGetTransactions()
+  const transactions = transactionsQuery.data || []
 
-  const isDisabled = accountsQuery.isLoading || deleteAccounts.isPending
+  const isDisabled = transactionsQuery.isLoading || deleteTransactions.isPending
 
-  if(accountsQuery.isLoading) {
+  if(transactionsQuery.isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto -mt-24 w-full pb-10">
         <Card className="border-none drop-shadow-sm">
@@ -39,20 +39,20 @@ export default function CategoriesPage() {
     <div className="max-w-screen-2xl mx-auto -mt-24 w-full pb-10">
       <Card className="border-none drop-shadow-sm">
         <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
-          <CardTitle className="text-xl line-clamp-1">Categories</CardTitle>
-          <Button size={'sm'} onClick={newCategory.onOpen}> 
+          <CardTitle className="text-xl line-clamp-1">Transactions History</CardTitle>
+          <Button size={'sm'} onClick={newTransaction.onOpen}> 
             <PlusIcon className="size-4 mr-2"/>
-            Add new 
+            Add new
           </Button>
         </CardHeader>
         <CardContent>
           <DataTable 
             columns={columns} 
-            data={accounts} 
+            data={transactions} 
             filterKey="name" 
             onDelete={(row) => {
               const ids = row.map((r) => r.original.id)
-              deleteAccounts.mutate({ ids })
+              deleteTransactions.mutate({ ids })
             }} 
             disabled={isDisabled}/>
         </CardContent>
